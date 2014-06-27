@@ -3,6 +3,8 @@ Github Changelog
 
 Quick and dirty script to generate a markdown changelog by release using Github's API and git log. It contacts the GH API to get a list of your releases, and then executes a `git log` command to look for any commit logs with a specified phrase, for example `fix`, `resolve`, `closes`, `closed`, or `#changelog`.
 
+See the [EXAMPLE-OUTPUT.md](https://github.com/snipe/gh-changelog/blob/master/EXAMPLE-OUTPUT.md) for an example of the output it generates.
+
 ## Customizing
 
 You can configure what terms you want to look for in the commit logs, based on your own workflow. For example, if you always use a tag like `#changelog` in the commits you'd like to have in the changelog, you could omit the other phrases.
