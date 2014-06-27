@@ -14,7 +14,7 @@ The `$string` variable contains a simple set of words you want to search on. The
 `$string = 'fix|resolve|closes|closed|#changelog';`
 
 ## Usage
-Download the gh-changelog.php file and put it in your project directory. (You may want to add it to `.gitignore` for housekeeping.)
+Download the `gh-changelog.php` file and put it in your project directory. (You may want to add it to `.gitignore` for housekeeping, and to be sure it won't get deployed to the server with the rest of your versioned code.)
 
 Modify the `$gh_user` and `$gh_repo` variables to match the GH user and repo you'd like to run a changelog on.
 
