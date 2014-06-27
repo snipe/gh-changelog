@@ -23,3 +23,5 @@ From the command line, while within your Github project directory on your local 
 `php gh-changelog.php`
 
 It will **overwrite** your existing `CHANGELOG.md`, unless you have specified a different output file name.
+
+The string is not currently escaped when being sent to `exec()`, so please don't leave this on a webserver somewhere. It's meant to be run locally, and the resulting output file added to your source.
