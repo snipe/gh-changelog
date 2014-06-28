@@ -24,8 +24,6 @@ From the command line, while within your Github project directory on your local 
 
 It will **overwrite** your existing `CHANGELOG.md`, unless you have specified a different output file name.
 
-The string is not currently escaped when being sent to `exec()`, so please don't leave this on a webserver somewhere. It's meant to be run locally, and the resulting output file added to your source.
-
 ## Excluding Commits
 
 If you have a habit of generating some sweary commits, or you want to exclude commits that contain specific keywords, the `$omit` variable is for you. Just like `$string`, you can use a single word, or pipe-delimited words.

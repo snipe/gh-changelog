@@ -40,16 +40,16 @@ for($i=0; $i<count($obj); $i++) {
 	    }
 	    $changelog = "\n\n###  ".$obj[$i]['name']." - Released ".date("M d, Y h:i:s",strtotime($obj[$i]['created_at']))."\n".$pre."\n";
 	    file_put_contents($file,$changelog,FILE_APPEND);
+	    
 	    $gitlog = 'git log '.escapeshellarg($obj[$i]['tag_name']).'...'.escapeshellarg($obj[$next]['tag_name']).' ';
 	    $gitlog .= '--pretty=format:\'* <a href="http://github.com/snipe/snipe-it/commit/%H">view</a> &bull;';
-	    $gitlog .= ' %s \' --reverse | grep -i -E "'.$string.'" ';
+	    $gitlog .= ' %s \' --reverse | grep -i -E '.escapeshellarg($string).' ';
+	    
 	    if ($omit!=''){
-		    $gitlog .= ' | grep -i -E -v "'.$omit.'"';
+		    $gitlog .= ' | grep -i -E -v '.escapeshellarg($omit).'';
 	    }
 	    $gitlog .= '>> '.escapeshellarg($file);
 	    exec($gitlog);
   
     }
 }
-
-
