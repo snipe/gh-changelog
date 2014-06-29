@@ -7,8 +7,8 @@ ini_set( 'date.timezone', 'UTC' );
 /* 
 * YOU MUST CHANGE THESE VARIABLES 
 */
-$gh_user = 'snipe';
-$gh_repo = 'snipe-it';
+$gh_user = 'your-user';
+$gh_repo = 'your-repo';
 $file = 'CHANGELOG.md';
 $string = 'fix|resolve|closes|closed|#changelog';
 $omit = 'fuck|another';
