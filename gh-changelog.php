@@ -1,11 +1,14 @@
 <?php
 #!/usr/bin/php -q
 
+/* PHP requires defined timezone; GitHub uses UTC */
+ini_set( 'date.timezone', 'UTC' );
+
 /* 
 * YOU MUST CHANGE THESE VARIABLES 
 */
-$gh_user = 'your-user';
-$gh_repo = 'your-repo';
+$gh_user = 'snipe';
+$gh_repo = 'snipe-it';
 $file = 'CHANGELOG.md';
 $string = 'fix|resolve|closes|closed|#changelog';
 $omit = 'fuck|another';
