@@ -42,7 +42,7 @@ for($i=0; $i<count($obj); $i++) {
 	    file_put_contents($file,$changelog,FILE_APPEND);
 	    
 	    $gitlog = 'git log '.escapeshellarg($obj[$i]['tag_name']).'...'.escapeshellarg($obj[$next]['tag_name']).' ';
-	    $gitlog .= '--pretty=format:\'* <a href="http://github.com/snipe/snipe-it/commit/%H">view</a> &bull;';
+	    $gitlog .= '--pretty=format:\'* <a href="http://github.com/'.$gh_user.'/'.$gh_repo.'/commit/%H">view</a> &bull;';
 	    $gitlog .= ' %s \' --reverse | grep -i -E '.escapeshellarg($string).' ';
 	    
 	    if ($omit!=''){
