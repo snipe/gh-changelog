@@ -23,33 +23,32 @@ $ch = curl_init();
 	$data = curl_exec($ch);
 	curl_close($ch);
 
+$releases = json_decode($data, TRUE);
 
-$obj = json_decode($data, TRUE);
-$changelog = '';
-file_put_contents($file,$changelog);
+while( $obj = array_shift( $releases ) )
+{
+	/* Define the beginning of each release block in the changelog */
+	$changelog = "\n\n###  ".$obj['name']." - Released ".date("M d, Y h:i:s",strtotime($obj['created_at']))."\n";
+	$changelog .= $obj['prerelease'] == 'true' ? '#### This is a pre-release '."\n": '';
+	file_put_contents($file,$changelog,FILE_APPEND);
 
-for($i=0; $i<count($obj); $i++) {
-	$next = $i+1;
+	/* Retrieve and format each commit entry */
+	$gitlog = 'git log '.escapeshellarg($obj['tag_name']);
+
+	/* Set commit limit based on next tag name */
+	if ( $next = current($releases) )
+	{
+		$gitlog .= '...'.escapeshellarg($next['tag_name']).' ';
+	}
+	else $gitlog .= ' ';
+
+	$gitlog .= '--pretty=format:\'* <a href="http://github.com/snipe/snipe-it/commit/%H">view</a> &bull;';
+	$gitlog .= ' %s \' --reverse | grep -i -E '.escapeshellarg($string).' ';
+
+	if ($omit!=''){
+		$gitlog .= ' | grep -i -E -v '.escapeshellarg($omit).'';
+	}
 	
-	if ((count($obj) > $next)) {
-	    echo "Info:  " . $obj[$i]['name']." (".$obj[$i]['tag_name'].") - created ".date("M d, Y h:i:s",strtotime($obj[$i]['created_at']))."\n";
-	    if ($obj[$i]['prerelease']=='true') {
-		    $pre ='#### This is a pre-release ';
-	    } else {
-		    $pre ='';
-	    }
-	    $changelog = "\n\n###  ".$obj[$i]['name']." - Released ".date("M d, Y h:i:s",strtotime($obj[$i]['created_at']))."\n".$pre."\n";
-	    file_put_contents($file,$changelog,FILE_APPEND);
-	    
-	    $gitlog = 'git log '.escapeshellarg($obj[$i]['tag_name']).'...'.escapeshellarg($obj[$next]['tag_name']).' ';
-	    $gitlog .= '--pretty=format:\'* <a href="http://github.com/snipe/snipe-it/commit/%H">view</a> &bull;';
-	    $gitlog .= ' %s \' --reverse | grep -i -E '.escapeshellarg($string).' ';
-	    
-	    if ($omit!=''){
-		    $gitlog .= ' | grep -i -E -v '.escapeshellarg($omit).'';
-	    }
-	    $gitlog .= '>> '.escapeshellarg($file);
-	    exec($gitlog);
-  
-    }
+	$gitlog .= '>> '.escapeshellarg($file);
+	exec($gitlog);
 }
