@@ -42,7 +42,7 @@ while( $obj = array_shift( $releases ) )
 	}
 	else $gitlog .= ' ';
 
-	$gitlog .= '--pretty=format:\'* <a href="http://github.com/snipe/snipe-it/commit/%H">view</a> &bull;';
+	$gitlog .= '--pretty=format:\'* <a href="http://github.com/'.$gh_user.'/'.$gh_repo.'/commit/%H">view</a> &bull;';
 	$gitlog .= ' %s \' --reverse | grep -i -E '.escapeshellarg($string).' ';
 
 	if ($omit!=''){
