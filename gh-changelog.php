@@ -1,6 +1,9 @@
 <?php
 #!/usr/bin/php -q
 
+/* PHP requires defined timezone; GitHub uses UTC */
+ini_set( 'date.timezone', 'UTC' );
+
 /* 
 * YOU MUST CHANGE THESE VARIABLES 
 */
